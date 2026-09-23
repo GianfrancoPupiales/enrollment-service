@@ -1,6 +1,7 @@
 package nicos.enrollmentservice.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import nicos.enrollmentservice.domain.exceptions.CourseAlreadyEnrolledException;
 import nicos.enrollmentservice.domain.exceptions.CreditLimitExceededException;
 import nicos.enrollmentservice.domain.exceptions.InvalidCreditLimitException;
@@ -8,17 +9,23 @@ import nicos.enrollmentservice.domain.exceptions.InvalidCreditLimitException;
 import java.util.*;
 
 public class Enrollment {
+    @Getter
     private EnrollmentId enrollmentId;
+    @Getter
     private StudentId studentId;
+    @Getter
     private AcademicPeriodId academicPeriodId;
     private final List<EnrolledCourse> courses;
+    @Getter
     private int maxAllowedCredits;
 
-    private Enrollment(EnrollmentId enrollmentId,
-                       StudentId studentId,
-                       AcademicPeriodId academicPeriodId,
-                       List<EnrolledCourse> courses,
-                       int maxAllowedCredits) {
+    private Enrollment(
+            EnrollmentId enrollmentId,
+            StudentId studentId,
+            AcademicPeriodId academicPeriodId,
+            List<EnrolledCourse> courses,
+            int maxAllowedCredits
+    ) {
         this.enrollmentId = enrollmentId;
         this.studentId = studentId;
         this.academicPeriodId = academicPeriodId;
@@ -32,7 +39,23 @@ public class Enrollment {
 
         EnrollmentId enrollmentId = new EnrollmentId(UUID.randomUUID());
 
-        return new Enrollment(enrollmentId, studentId, academicPeriodId, new ArrayList<>(), 15 );
+        return new Enrollment(enrollmentId, studentId, academicPeriodId, new ArrayList<>(), 15);
+    }
+
+    public static Enrollment reconstitute(
+            EnrollmentId enrollmentId,
+            StudentId studentId,
+            AcademicPeriodId academicPeriodId,
+            List<EnrolledCourse> courses,
+            int maxAllowedCredits
+    ) {
+        return new Enrollment(
+                enrollmentId,
+                studentId,
+                academicPeriodId,
+                new ArrayList<>(courses),
+                maxAllowedCredits
+        );
     }
 
     public void enrollCourse(CourseId courseId, int credits) {
@@ -45,13 +68,15 @@ public class Enrollment {
             throw new CourseAlreadyEnrolledException();
         }
 
-        int totalCredits = courses.stream().mapToInt(EnrolledCourse::credits).sum();
-
-        if (totalCredits + credits > this.maxAllowedCredits) {
+        if (totalCredits() + credits > this.maxAllowedCredits) {
             throw new CreditLimitExceededException(maxAllowedCredits);
         }
 
         courses.add(enrolledCourse);
+    }
+
+    public int totalCredits() {
+        return courses.stream().mapToInt(EnrolledCourse::credits).sum();
     }
 
     public void approveCreditExtension(int newLimit) {
