@@ -5,6 +5,7 @@ import lombok.Getter;
 import nicos.enrollmentservice.domain.exceptions.CourseAlreadyEnrolledException;
 import nicos.enrollmentservice.domain.exceptions.CreditLimitExceededException;
 import nicos.enrollmentservice.domain.exceptions.InvalidCreditLimitException;
+import nicos.enrollmentservice.domain.exceptions.NotEnrolledCourseException;
 
 import java.util.*;
 
@@ -61,10 +62,7 @@ public class Enrollment {
     public void enrollCourse(CourseId courseId, int credits) {
         EnrolledCourse enrolledCourse = new EnrolledCourse(courseId, credits);
 
-        boolean alreadyEnrolled = courses.stream()
-                .anyMatch(course -> course.courseId().equals(courseId));
-
-        if (alreadyEnrolled) {
+        if (isAlreadyEnrolled(courseId)) {
             throw new CourseAlreadyEnrolledException();
         }
 
@@ -73,6 +71,11 @@ public class Enrollment {
         }
 
         courses.add(enrolledCourse);
+    }
+
+    private boolean isAlreadyEnrolled(CourseId courseId) {
+        return courses.stream()
+                .anyMatch(course -> course.courseId().equals(courseId));
     }
 
     public int totalCredits() {
@@ -89,5 +92,15 @@ public class Enrollment {
 
     public List<EnrolledCourse> courses() {
         return Collections.unmodifiableList(this.courses);
+    }
+
+    public void dropCourse(CourseId courseId){
+        if (!isAlreadyEnrolled(courseId)){
+            throw new NotEnrolledCourseException(courseId.value());
+        }
+
+        courses.removeIf(
+                course -> course.courseId().equals(courseId)
+        );
     }
 }
