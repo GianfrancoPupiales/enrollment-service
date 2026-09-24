@@ -1,6 +1,5 @@
 package nicos.enrollmentservice.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import nicos.enrollmentservice.domain.exceptions.CourseAlreadyEnrolledException;
 import nicos.enrollmentservice.domain.exceptions.CreditLimitExceededException;
