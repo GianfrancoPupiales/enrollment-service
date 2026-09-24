@@ -5,9 +5,10 @@ import nicos.enrollmentservice.application.port.in.EnrollCourseUseCase;
 import nicos.enrollmentservice.domain.Enrollment;
 import nicos.enrollmentservice.domain.EnrollmentId;
 import nicos.enrollmentservice.domain.port.out.EnrollmentRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
-
+@Transactional
 public class EnrollCourseService implements EnrollCourseUseCase {
     private final EnrollmentRepository enrollmentRepository;
 
