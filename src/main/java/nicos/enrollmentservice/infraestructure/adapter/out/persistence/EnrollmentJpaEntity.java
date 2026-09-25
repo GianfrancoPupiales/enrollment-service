@@ -2,6 +2,7 @@ package nicos.enrollmentservice.infraestructure.adapter.out.persistence;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,5 +21,5 @@ public class EnrollmentJpaEntity {
     private int maxAllowedCredits;
 
     @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL)
-    private List<EnrolledCourseJpaEntity> courses;
+    private List<EnrolledCourseJpaEntity> courses = new ArrayList<>();
 }
