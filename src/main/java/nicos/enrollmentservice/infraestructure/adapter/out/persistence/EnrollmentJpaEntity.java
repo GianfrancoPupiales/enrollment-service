@@ -20,6 +20,6 @@ public class EnrollmentJpaEntity {
     @Column(name = "max_allowed_credits", nullable = false)
     private int maxAllowedCredits;
 
-    @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EnrolledCourseJpaEntity> courses = new ArrayList<>();
 }
