@@ -1,10 +1,17 @@
 package nicos.enrollmentservice.infraestructure.adapter.out.persistence;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.UUID;
 
-
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "enrolled_course")
 public class EnrolledCourseJpaEntity {
