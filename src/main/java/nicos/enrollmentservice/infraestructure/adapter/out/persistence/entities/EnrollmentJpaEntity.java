@@ -1,4 +1,4 @@
-package nicos.enrollmentservice.infraestructure.adapter.out.persistence;
+package nicos.enrollmentservice.infraestructure.adapter.out.persistence.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
