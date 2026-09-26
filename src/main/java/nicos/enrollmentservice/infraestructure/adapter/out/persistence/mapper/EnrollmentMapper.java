@@ -1,8 +1,8 @@
 package nicos.enrollmentservice.infraestructure.adapter.out.persistence.mapper;
 
 import nicos.enrollmentservice.domain.*;
-import nicos.enrollmentservice.infraestructure.adapter.out.persistence.EnrolledCourseJpaEntity;
-import nicos.enrollmentservice.infraestructure.adapter.out.persistence.EnrollmentJpaEntity;
+import nicos.enrollmentservice.infraestructure.adapter.out.persistence.entities.EnrolledCourseJpaEntity;
+import nicos.enrollmentservice.infraestructure.adapter.out.persistence.entities.EnrollmentJpaEntity;
 
 import java.util.List;
 import java.util.UUID;
