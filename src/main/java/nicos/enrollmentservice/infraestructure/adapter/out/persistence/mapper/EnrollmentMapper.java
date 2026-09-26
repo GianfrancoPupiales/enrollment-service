@@ -19,4 +19,8 @@ public class EnrollmentMapper {
 
         return Enrollment.reconstitute(enrollmentId, studentId, academicPeriodId, domainCourses, maxAllowedCredits);
     }
+
+    public EnrollmentJpaEntity toJpaEntity(Enrollment enrollment){
+
+    }
 }
