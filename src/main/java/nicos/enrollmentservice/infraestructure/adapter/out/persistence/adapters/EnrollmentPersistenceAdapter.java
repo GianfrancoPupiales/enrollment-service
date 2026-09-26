@@ -38,6 +38,6 @@ public class EnrollmentPersistenceAdapter implements EnrollmentRepository {
 
     @Override
     public Optional<Enrollment> findByStudentIdAndAcademicPeriodId(StudentId studentId, AcademicPeriodId academicPeriodId) {
-        return Optional.empty();
+        return springDataRepository.findByStudentIdAndAcademicPeriodId(studentId.value(),academicPeriodId.value()).map(mapper::toDomain);
     }
 }
