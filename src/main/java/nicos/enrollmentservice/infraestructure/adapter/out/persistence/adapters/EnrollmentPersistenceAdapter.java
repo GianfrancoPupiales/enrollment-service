@@ -19,7 +19,7 @@ public class EnrollmentPersistenceAdapter implements EnrollmentRepository {
     private final SpringDataEnrollmentRepository springDataRepository;
     private final EnrollmentMapper mapper;
 
-    public EnrollmentPersistenceAdapter (SpringDataEnrollmentRepository springDataRepository, EnrollmentMapper mapper){
+    public EnrollmentPersistenceAdapter(SpringDataEnrollmentRepository springDataRepository, EnrollmentMapper mapper) {
         this.springDataRepository = springDataRepository;
         this.mapper = mapper;
     }
@@ -33,7 +33,7 @@ public class EnrollmentPersistenceAdapter implements EnrollmentRepository {
 
     @Override
     public Optional<Enrollment> findById(EnrollmentId enrollmentId) {
-        return Optional.empty();
+        return springDataRepository.findById(enrollmentId.value()).map(mapper::toDomain);
     }
 
     @Override
