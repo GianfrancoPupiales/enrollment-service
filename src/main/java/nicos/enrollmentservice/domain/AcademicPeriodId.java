@@ -1,4 +1,4 @@
 package nicos.enrollmentservice.domain;
 
-public record AcademicPeriodId(String academicPeriodId) {
+public record AcademicPeriodId(String value) {
 }
