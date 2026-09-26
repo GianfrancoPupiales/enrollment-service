@@ -6,5 +6,7 @@ import nicos.enrollmentservice.infraestructure.adapter.out.persistence.Enrollmen
 import java.util.List;
 
 public class EnrollmentMapper {
-    
+    public Enrollment toDomain(EnrollmentJpaEntity entity) {
+
+    }
 }
