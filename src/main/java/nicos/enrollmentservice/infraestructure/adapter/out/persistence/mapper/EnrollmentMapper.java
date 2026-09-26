@@ -7,6 +7,16 @@ import java.util.List;
 
 public class EnrollmentMapper {
     public Enrollment toDomain(EnrollmentJpaEntity entity) {
+        EnrollmentId enrollmentId = new EnrollmentId(entity.getId());
+        StudentId studentId = new StudentId(entity.getStudentId());
+        AcademicPeriodId academicPeriodId = new AcademicPeriodId(entity.getAcademicPeriodId());
+        int maxAllowedCredits = entity.getMaxAllowedCredits();
 
+        List<EnrolledCourse> domainCourses = entity.getCourses().stream()
+                .map(enrolledCourseEntity ->
+                        new EnrolledCourse(new CourseId(enrolledCourseEntity.getCourseId()), enrolledCourseEntity.getCredits()))
+                .toList();
+
+        return Enrollment.reconstitute(enrollmentId, studentId, academicPeriodId, domainCourses, maxAllowedCredits);
     }
 }
