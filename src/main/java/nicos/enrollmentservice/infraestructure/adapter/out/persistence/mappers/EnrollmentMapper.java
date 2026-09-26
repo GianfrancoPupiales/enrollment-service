@@ -1,4 +1,4 @@
-package nicos.enrollmentservice.infraestructure.adapter.out.persistence.mapper;
+package nicos.enrollmentservice.infraestructure.adapter.out.persistence.mappers;
 
 import nicos.enrollmentservice.domain.*;
 import nicos.enrollmentservice.infraestructure.adapter.out.persistence.entities.EnrolledCourseJpaEntity;
