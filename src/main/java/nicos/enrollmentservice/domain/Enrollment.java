@@ -15,6 +15,7 @@ public class Enrollment {
     private StudentId studentId;
     @Getter
     private AcademicPeriodId academicPeriodId;
+    @Getter
     private final List<EnrolledCourse> courses;
     @Getter
     private int maxAllowedCredits;
