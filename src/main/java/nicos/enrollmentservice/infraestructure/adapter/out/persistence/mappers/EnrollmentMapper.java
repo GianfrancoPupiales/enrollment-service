@@ -3,11 +3,13 @@ package nicos.enrollmentservice.infraestructure.adapter.out.persistence.mappers;
 import nicos.enrollmentservice.domain.*;
 import nicos.enrollmentservice.infraestructure.adapter.out.persistence.entities.EnrolledCourseJpaEntity;
 import nicos.enrollmentservice.infraestructure.adapter.out.persistence.entities.EnrollmentJpaEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Component
 public class EnrollmentMapper {
     public Enrollment toDomain(EnrollmentJpaEntity entity) {
         EnrollmentId enrollmentId = new EnrollmentId(entity.getId());
